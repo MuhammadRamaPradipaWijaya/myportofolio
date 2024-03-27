@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+:root {
+  --secondary-color: #ca8a04;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --extra-light: #e0eaf7;
+  --color-primary: #3636e4;
+  --max-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+
+/* CSS Navbar */
+nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #edebeb;
+  z-index: 99;
+}
+
+.nav__content {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .logo a {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: 0.3s;
+}
+
+nav .logo a:hover {
+  color: var(--text-dark);
+}
+
+nav .checkbox {
+  display: none;
+}
+
+nav input {
+  display: none;
+}
+nav .checkbox i {
+  font-size: 2rem;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+/* Akhir CSS Navbar */
+
+
+/* ####################### */
+.btn-kirim{
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 36px;
+  border-radius: 500px;
+  transition: 1s;
+  color: #fff;
+  background: var(--color-primary);
+}
+
+.btn-kirim:hover {
+  background: #3aa2e2;
+  box-shadow: 0 8px 28px rgba(56, 20, 20, 0.45);
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  transition: left 0.3s;
+}
+
+ul li a {
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: 0.3s;
+}
+
+ul li a:hover {
+  border-top-color: var(--secondary-color);
+  border-bottom-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.hero {
+  background-color: var(--extra-light);
+}
+
+.hero_container {
+  min-height: 95vh;
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  justify-content: flex-end;
+}
+
+#services {
+  background-color: var(--extra-light);
+}
+
+#contact {
+  background-color: var(--extra-light);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.subtitle {
+  letter-spacing: 2px;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 3rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.title span {
+  font-weight: 600;
+}
+
+.description {
+  line-height: 1.5rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.image {
+  display: grid;
+  place-items: center;
+}
+
+.image img {
+  width: min(25rem, 90%);
+  border-radius: 100%;
+}
+
+@media (width < 750px) {
+  .hero_container {
+    padding: 10rem 1rem 5rem 1rem;
+    text-align: center;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 85px);
+    left: -100%;
+    top: 85px;
+    background-color: var(--extra-light);
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  nav .checkbox {
+    display: block;
+  }
+
+  nav #check:checked ~ ul {
+    left: 0;
+  }
+}
+/* ####################### */
+
+/* CSS Service */
+.paragraph {
+  font-weight: 400;
+  color: #8b8e93;
+  font-size: 15px;
+  line-height: 1.6;
+  font-family: "Open Sans", sans-serif
+}
+
+.icon-bg-circle {
+  position: relative
+}
+
+.icon-lg {
+  font-size: 50px
+}
+
+.icon-bg-circle::before {
+  z-index: 1;
+  position: relative
+}
+
+.icon-bg-circle::after {
+  content: '';
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  top: -20px;
+  left: 10px;
+  border-radius: 50%;
+  background: inherit;
+  opacity: .1
+}
+
+.icon-bg-yellow::after {
+  background: #f6a622 !important
+}
+
+.icon-yellow {
+  color: #f6a622
+}
+
+.icon-bg-purple::after {
+  background: #7952f5
+}
+
+.icon-purple {
+  color: #7952f5
+}
+
+.icon-bg-primary::after {
+  background: #062caf !important
+}
+
+.icon-primary {
+  color: #062caf
+}
+
+.icon-bg-red::after {
+  background: #ff4949
+}
+
+.icon-red {
+  color: #ff4949
+}
+/* Akhir CSS Service */
+
+/* CSS Card */
+.subtitle {
+  letter-spacing: 2px;
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 3rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.title span {
+  font-weight: 600;
+}
+
+.image {
+  display: grid;
+  place-items: center;
+}
+
+.image img {
+  width: min(25rem, 90%);
+  border-radius: 100%;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  flex-grow: 1;
+}
+
+.title_card {
+  font-size: 1.5rem;
+  line-height: 3rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+/* Akhir CSS Card */

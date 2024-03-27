@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="Portfolio Rama" />
+    <meta property="og:description" content="Selamat datang di portofolio saya! Saya Rama, seorang mahasiswa jurusan Teknologi Informasi di Politeknik Negeri Jember." />
+    <meta property="og:image" content="{{ url_for('static', filename='static/Portofolio.jpeg') }}" />
+
+    <title>Portfolio_Rama</title>
+    <!-- link CDN Boostrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- link Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- link CSS -->
+    <link rel="stylesheet" href="../static/styles.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function loadMessages() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/messages',
+                    success: function (response) {
+                        $('#pesan-container').empty();
+                        response.messages.forEach(function (pesan) {
+                            var pesanHtml = `
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">${pesan.name}</h5>
+                                        <small class="text-muted">${pesan.email}</small>
+                                    </div>
+                                    <p class="mb-1">${pesan.message}</p>
+                                </a>
+                            `;
+                            $('#pesan-container').append(pesanHtml);
+                        });
+                    }
+                });
+            }
+
+            function kirimPesan() {
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var message = $("#message").val();
+
+                // Validasi inputnyaa
+                if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+                    alert('Mohon isi semua field sebelum mengirim pesan!');
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/contact',
+                    data: {
+                        name: name,
+                        email: email,
+                        message: message
+                    },
+                    success: function (response) {
+                        alert(response['msg']);
+                        window.location.reload();
+                    }
+                });
+            }
+
+            loadMessages();
+
+            $(".btn-kirim").click(function () {
+                kirimPesan();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <body class="d-flex flex-column h-100">
+
+        <nav>
+            <div class="nav__content">
+                <div class="logo"><a href="#">PortfolioRm</a></div>
+                <label for="check" class="checkbox">
+                    <i class="ri-menu-line"></i>
+                </label>
+                <input type="checkbox" name="check" id="check" />
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Service</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero_container">
+                <div class="content">
+                    <p class="subtitle">Halo</p>
+                    <h1 class="title">
+                        Saya <span>Muhammad Rama Pradipa Wijaya</span>
+                    </h1>
+                    <p class="description">
+                        Selamat datang di portofolio saya! Saya Rama,
+                        seorang mahasiswa jurusan Teknologi Informasi di Politeknik Negeri Jember.
+                        Saya telah mengerjakan berbagai proyek mulai dari dekstop. web, dan mobile.
+                    </p>
+                </div>
+                <div class="image">
+                    <img src="../static/rama.jpg" alt="profile" />
+                </div>
+            </div>
+        </section>
+
+        <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 290">
+                <path fill="#e0eaf7" fill-opacity="1"
+                    d="M0,256L14.1,218.7C28.2,181,56,107,85,117.3C112.9,128,141,224,169,256C197.6,288,226,256,254,229.3C282.4,203,311,181,339,181.3C367.1,181,395,203,424,229.3C451.8,256,480,288,508,250.7C536.5,213,565,107,593,101.3C621.2,96,649,192,678,229.3C705.9,267,734,245,762,245.3C790.6,245,819,267,847,272C875.3,277,904,267,932,229.3C960,192,988,128,1016,90.7C1044.7,53,1073,43,1101,69.3C1129.4,96,1158,160,1186,192C1214.1,224,1242,224,1271,197.3C1298.8,171,1327,117,1355,106.7C1383.5,96,1412,128,1426,144L1440,160L1440,0L1425.9,0C1411.8,0,1384,0,1355,0C1327.1,0,1299,0,1271,0C1242.4,0,1214,0,1186,0C1157.6,0,1129,0,1101,0C1072.9,0,1045,0,1016,0C988.2,0,960,0,932,0C903.5,0,875,0,847,0C818.8,0,791,0,762,0C734.1,0,706,0,678,0C649.4,0,621,0,593,0C564.7,0,536,0,508,0C480,0,452,0,424,0C395.3,0,367,0,339,0C310.6,0,282,0,254,0C225.9,0,198,0,169,0C141.2,0,113,0,85,0C56.5,0,28,0,14,0L0,0Z">
+                </path>
+            </svg></div>
+
+        <!-- About Me -->
+        <section id="about" class="py-1">
+            <div class="container">
+                <h2 class="text-center mb-4">About Me</h2>
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-6 col-md-12 col-sm-12 about-left">
+                        <img class="img-fluid" src="../static/ab-img.png" alt="">
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 about-right"><br>
+                        <p class="text-justify">
+                            Saya Rama, seorang mahasiswa semester 4 di Jurusan Teknologi Informasi
+                            dari Politeknik Negeri Jember. Saya memiliki antusiasme yang tinggi
+                            dalam menggali pengetahuan dan keterampilan di dunia teknologi, dengan
+                            fokus pada pengembangan perangkat lunak dan sistem informasi. Dengan
+                            dedikasi dan semangat belajar yang kuat, saya telah aktif terlibat dalam
+                            berbagai proyek akademis yang menuntut, serta berpartisipasi dalam
+                            kegiatan yang dapat memperluas wawasan saya dalam bidang ini.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#e0eaf7" fill-opacity="1"
+                    d="M0,256L9.6,218.7C19.2,181,38,107,58,117.3C76.8,128,96,224,115,229.3C134.4,235,154,149,173,122.7C192,96,211,128,230,128C249.6,128,269,96,288,96C307.2,96,326,128,346,160C364.8,192,384,224,403,202.7C422.4,181,442,107,461,80C480,53,499,75,518,101.3C537.6,128,557,160,576,154.7C595.2,149,614,107,634,122.7C652.8,139,672,213,691,208C710.4,203,730,117,749,106.7C768,96,787,160,806,170.7C825.6,181,845,139,864,112C883.2,85,902,75,922,90.7C940.8,107,960,149,979,192C998.4,235,1018,277,1037,250.7C1056,224,1075,128,1094,106.7C1113.6,85,1133,139,1152,138.7C1171.2,139,1190,85,1210,69.3C1228.8,53,1248,75,1267,106.7C1286.4,139,1306,181,1325,186.7C1344,192,1363,160,1382,170.7C1401.6,181,1421,235,1430,261.3L1440,288L1440,320L1430.4,320C1420.8,320,1402,320,1382,320C1363.2,320,1344,320,1325,320C1305.6,320,1286,320,1267,320C1248,320,1229,320,1210,320C1190.4,320,1171,320,1152,320C1132.8,320,1114,320,1094,320C1075.2,320,1056,320,1037,320C1017.6,320,998,320,979,320C960,320,941,320,922,320C902.4,320,883,320,864,320C844.8,320,826,320,806,320C787.2,320,768,320,749,320C729.6,320,710,320,691,320C672,320,653,320,634,320C614.4,320,595,320,576,320C556.8,320,538,320,518,320C499.2,320,480,320,461,320C441.6,320,422,320,403,320C384,320,365,320,346,320C326.4,320,307,320,288,320C268.8,320,250,320,230,320C211.2,320,192,320,173,320C153.6,320,134,320,115,320C96,320,77,320,58,320C38.4,320,19,320,10,320L0,320Z">
+                </path>
+            </svg></div>
+
+        <!-- Services -->
+        <section id="services" class="py-1">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 text-center mb-4">
+                        <h2 class="section-title">Services</h2>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-4">
+                        <div class="card border-0 shadow rounded-xs pt-5">
+                            <div class="card-body"> <i
+                                    class="fa fa-object-ungroup icon-lg icon-primary icon-bg-primary icon-bg-circle mb-3"></i>
+                                <h4 class="mt-4 mb-3">Desain Grafis</h4>
+                                <p>Saya memiliki skill untuk desain grafis yang mencakup pembuatan desain
+                                    dari awal maupun modifikasi dan penyempurnaan desain yang ada.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-4">
+                        <div class="card border-0 shadow rounded-xs pt-5">
+                            <div class="card-body"> <i
+                                    class="fa fa-users icon-lg icon-yellow icon-bg-yellow icon-bg-circle mb-3"></i>
+                                <h4 class="mt-4 mb-3">Dukungan Teknis</h4>
+                                <p>Saya memiliki skill untuk membantu dalam mengatasi masalah
+                                    teknis sehari-hari dengan perangkat lunak dan perangkat keras.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-4">
+                        <div class="card border-0 shadow rounded-xs pt-5">
+                            <div class="card-body"> <i
+                                    class="fa fa-database icon-lg icon-purple icon-bg-purple icon-bg-circle mb-3"></i>
+                                <h4 class="mt-4 mb-3">Manajemen Database</h4>
+                                <p>Saya memiliki skill untuk bantuan dalam merancang, mengimplementasikan,
+                                    dan mengelola basis data, dan termasuk perencanaan struktur database.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-4">
+                        <div class="card border-0 shadow rounded-xs pt-5">
+                            <div class="card-body"> <i
+                                    class="fa fa-desktop icon-lg icon-red icon-bg-red icon-bg-circle mb-3"></i>
+                                <h4 class="mt-4 mb-3">Pengujian Aplikasi</h4>
+                                <p>Saya memiliki skill untuk pengujian aplikasi untuk memastikan
+                                    fungsionalitas yang optimal, keamanan, dan kinerja yang stabil sebelum
+                                    diluncurkan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1220 290">
+                <path fill="#e0eaf7" fill-opacity="1"
+                    d="M0,256L14.1,218.7C28.2,181,56,107,85,117.3C112.9,128,141,224,169,256C197.6,288,226,256,254,229.3C282.4,203,311,181,339,181.3C367.1,181,395,203,424,229.3C451.8,256,480,288,508,250.7C536.5,213,565,107,593,101.3C621.2,96,649,192,678,229.3C705.9,267,734,245,762,245.3C790.6,245,819,267,847,272C875.3,277,904,267,932,229.3C960,192,988,128,1016,90.7C1044.7,53,1073,43,1101,69.3C1129.4,96,1158,160,1186,192C1214.1,224,1242,224,1271,197.3C1298.8,171,1327,117,1355,106.7C1383.5,96,1412,128,1426,144L1440,160L1440,0L1425.9,0C1411.8,0,1384,0,1355,0C1327.1,0,1299,0,1271,0C1242.4,0,1214,0,1186,0C1157.6,0,1129,0,1101,0C1072.9,0,1045,0,1016,0C988.2,0,960,0,932,0C903.5,0,875,0,847,0C818.8,0,791,0,762,0C734.1,0,706,0,678,0C649.4,0,621,0,593,0C564.7,0,536,0,508,0C480,0,452,0,424,0C395.3,0,367,0,339,0C310.6,0,282,0,254,0C225.9,0,198,0,169,0C141.2,0,113,0,85,0C56.5,0,28,0,14,0L0,0Z">
+                </path>
+            </svg></div>
+
+        <!-- Portfolio -->
+        <section id="portfolio" class="py-1">
+            <div class="container">
+                <h2 class="text-center mb-4">Portfolio</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow rounded-xs">
+                            <img src="../static/apache-netbeans.jpg" class="card-img-top img-fluid">
+                            <div class="card-body">
+                                <h5 class="title_card">Projek Dekstop</h5>
+                                <p class="card-text">Pembuatan aplikasi point of sale (POS) berbasis desktop menggunakan
+                                    Java untuk meningkatkan pelayanan kasir di toko JajajanQ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow rounded-xs">
+                            <img src="../static/web-developer.jpg" class="card-img-top img-fluid">
+                            <div class="card-body">
+                                <h5 class="title_card">Projek Website</h5>
+                                <p class="card-text">Pembuatan website sistem informasi untuk pemilik kos disekitar
+                                    kampus dengan menggunakan HTML, CSS, PHP, dan Javascript untuk memberikan
+                                    informasi mengenai kos terdekat.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow rounded-xs">
+                            <img src="../static/android-studio.png" class="card-img-top img-fluid">
+                            <div class="card-body">
+                                <h5 class="title_card">Projek Mobile</h5>
+                                <p class="card-text">Pembuatan aplikasi berbasis mobile untuk manajemen
+                                    keuangan pribadi dengan menggunakan Kotlin dan Java.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#e0eaf7" fill-opacity="1"
+                    d="M0,256L9.6,218.7C19.2,181,38,107,58,117.3C76.8,128,96,224,115,229.3C134.4,235,154,149,173,122.7C192,96,211,128,230,128C249.6,128,269,96,288,96C307.2,96,326,128,346,160C364.8,192,384,224,403,202.7C422.4,181,442,107,461,80C480,53,499,75,518,101.3C537.6,128,557,160,576,154.7C595.2,149,614,107,634,122.7C652.8,139,672,213,691,208C710.4,203,730,117,749,106.7C768,96,787,160,806,170.7C825.6,181,845,139,864,112C883.2,85,902,75,922,90.7C940.8,107,960,149,979,192C998.4,235,1018,277,1037,250.7C1056,224,1075,128,1094,106.7C1113.6,85,1133,139,1152,138.7C1171.2,139,1190,85,1210,69.3C1228.8,53,1248,75,1267,106.7C1286.4,139,1306,181,1325,186.7C1344,192,1363,160,1382,170.7C1401.6,181,1421,235,1430,261.3L1440,288L1440,320L1430.4,320C1420.8,320,1402,320,1382,320C1363.2,320,1344,320,1325,320C1305.6,320,1286,320,1267,320C1248,320,1229,320,1210,320C1190.4,320,1171,320,1152,320C1132.8,320,1114,320,1094,320C1075.2,320,1056,320,1037,320C1017.6,320,998,320,979,320C960,320,941,320,922,320C902.4,320,883,320,864,320C844.8,320,826,320,806,320C787.2,320,768,320,749,320C729.6,320,710,320,691,320C672,320,653,320,634,320C614.4,320,595,320,576,320C556.8,320,538,320,518,320C499.2,320,480,320,461,320C441.6,320,422,320,403,320C384,320,365,320,346,320C326.4,320,307,320,288,320C268.8,320,250,320,230,320C211.2,320,192,320,173,320C153.6,320,134,320,115,320C96,320,77,320,58,320C38.4,320,19,320,10,320L0,320Z">
+                </path>
+            </svg></div>
+
+        <!-- Contact Me -->
+        <section id="contact" class="py-1">
+            <div class="container">
+                <h2 class="text-center mb-4">Contact Me</h2>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Pesan</label>
+                                <textarea class="form-control" id="message" rows="5"></textarea>
+                            </div>
+                            <div class="d-flex">
+                                <button type="button" class="btn btn-primary btn-kirim">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="list-group" id="pesan-container" style="max-width: 600px; margin: 0 auto;">
+                </div>
+            </div>
+            <br>
+            <br>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-4 bg-dark text-white text-center">
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>PortfolioRm</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    Designed by Muhammad Rama Pradipa Wijaya</a>
+                </div>
+            </div>
+        </footer>
+
+        <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    </body>
+</html>
